@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isMoving = true;
     public bool isHarvesting = false;
+    public bool isSprinting = false;
+    public bool isCrouching = false;
+
     public Rigidbody rb;
 
     public float hmov;
@@ -77,8 +80,37 @@ public class PlayerMovement : MonoBehaviour
         {
             isMoving = true;
         }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            isSprinting = true;
+        }
+        else
+        {
+            isSprinting = false;
+        }
 
-        rb.velocity = new Vector3(hmov, 0, vmov) * speed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.C))
+        {
+            isCrouching = true;
+        }
+        else
+        {
+            isCrouching = false;
+        }
+
+        if (isSprinting == true)
+        {
+            rb.velocity = new Vector3(hmov, 0, vmov) * maxSpeed * Time.deltaTime;
+        }
+        else if (isCrouching == true)
+        {
+            rb.velocity = new Vector3(hmov, 0, vmov) * minSpeed * Time.deltaTime;
+        }
+        else
+        {
+            rb.velocity = new Vector3(hmov, 0, vmov) * speed * Time.deltaTime;
+        }
+        
     }
 
     void Harvest()
