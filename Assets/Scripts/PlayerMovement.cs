@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
 
     public int wood = 0;
 
+    public Transform target;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.name == "Tree")
         {
             isHarvesting = true;
+            target = other.gameObject.transform;
         }
     }
 
@@ -58,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         {
             timer = 1;
             isHarvesting = false;
+            target = this.transform;
         }
     }
 
